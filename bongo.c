@@ -19,17 +19,6 @@ uint8_t current_tap_frame = 0;
 
 static long int oled_timeout = 600000; // 10 minutes
 
-enum layer_number {
-  _LOWER,
-  _RAISE,
-  _ADJUST,
-};
-
-layer_state_t layer_state_set_user(layer_state_t state) {
-	return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
-  }
-
-//
 // Rotate OLED display
 //
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
@@ -41,7 +30,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 // Render left OLED display
 //
 static void render_status(void) {
-    
+
     // WPM
     oled_write_P(PSTR("      "), false);
     sprintf(wpm_str, "%03d", get_current_wpm());
@@ -51,7 +40,7 @@ static void render_status(void) {
     // GUI keys indicator
     if (gui_on) oled_write_P(PSTR("\n       "), false);
     else oled_write_P(PSTR("\n      GUI   OFF"), false);
-    
+
     // Caps lock indicator
     led_t led_state = host_keyboard_led_state();
     oled_write_P(led_state.caps_lock ? PSTR("\n      CAPS LOCK") : PSTR("\n       "), false);
@@ -60,16 +49,29 @@ static void render_status(void) {
     oled_write_P(PSTR("\n      LAYER "), false);
 
     switch (get_highest_layer(layer_state)) {
-        case 2:
-	    oled_write_P(PSTR("RAISE"), false);
-	    break;
-	// Layer 1
-        case 1:
-            oled_write_P(PSTR("LOWER"), false);
+        case _QWERTY:
+            oled_write_P(PSTR("QWERTY"), false);
             break;
-        // Layer 0
+        case _SYM_1:
+            oled_write_P(PSTR("SYM_1 "), false);
+            break;
+        case _SYM_2:
+            oled_write_P(PSTR("SYM_2 "), false);
+            break;
+        case _FN:
+            oled_write_P(PSTR("FN    "), false);
+            break;
+        case _NUM:
+            oled_write_P(PSTR("NUM   "), false);
+            break;
+        case _NAV:
+            oled_write_P(PSTR("NAV   "), false);
+            break;
+        case _MEDIA:
+            oled_write_P(PSTR("MEDIA "), false);
+            break;
         default:
-            oled_write_P(PSTR("BASE "), false);
+            oled_write_P(PSTR("UNDEF "), false);
             break;
     }
 }
