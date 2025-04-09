@@ -8,7 +8,9 @@ enum custom_keycodes {
 	PASTE,
 	UNDO,
 	LANG,
-	HIRAGANA
+	HIRAGANA,
+	KATAKANA,
+	ROMANJI
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -62,9 +64,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_NUM] = LAYOUT_split_3x6_3(
 		//,-----------------------------------------------------------------------.                    ,-----------------------------------------------------------------------.
-			  KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,                          ES_ASTR,     ES_7,       ES_8,       ES_9,      ES_PERC,     KC_NO,
+			  KC_NO,    HIRAGANA,   ROMANJI,    KATAKANA,     KC_NO,      KC_NO,                          ES_ASTR,     ES_7,       ES_8,       ES_9,      ES_PERC,     KC_NO,
 		//|-----------+-----------+-----------+-----------+-----------+-----------|                    |-----------+-----------+-----------+-----------+-----------+-----------|
-			  KC_NO,    KC_CAPS,      LANG,     HIRAGANA,     KC_NO,      KC_NO,                          ES_SLSH,     ES_4,       ES_5,       ES_6,      ES_EQL,      KC_NO,
+			  KC_NO,    KC_CAPS,      LANG,       KC_NO,      KC_NO,      KC_NO,                          ES_SLSH,     ES_4,       ES_5,       ES_6,      ES_EQL,      KC_NO,
 		//|-----------+-----------+-----------+-----------+-----------+-----------|                    |-----------+-----------+-----------+-----------+-----------+-----------|
 			  KC_NO,      UNDO,       CUT,        COPY,       PASTE,      KC_NO,                          ES_PLUS,     ES_1,       ES_2,       ES_3,      ES_HASH,     KC_NO,
 		//|-----------+-----------+-----------+-----------+-----------+-----------|                    |-----------+-----------+-----------+-----------+-----------+-----------|
@@ -177,6 +179,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			}
 			return false;
 
+		case LANG:
+			if (record->event.pressed) {
+				// Alt + Shift
+				register_code(KC_LALT);
+				register_code(KC_LSFT);
+				unregister_code(KC_LSFT);
+				unregister_code(KC_LALT);
+			}
+			return false;
+
 		case HIRAGANA:
 			if (record->event.pressed) {
 				// Shift + Caps Lock
@@ -187,13 +199,25 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 			}
 			return false;
 
-		case LANG:
+		case KATAKANA:
 			if (record->event.pressed) {
-				// Alt + Shift
-				register_code(KC_LALT);
+				// Alt + Caps Lock
+				register_code(KC_LCTL);
+				register_code(KC_CAPS);
+				unregister_code(KC_CAPS);
+				unregister_code(KC_LCTL);
+			}
+			return false;
+
+		case ROMANJI:
+			if (record->event.pressed) {
+				// Ctrl + Shift + Caps Lock
+				register_code(KC_LCTL);
 				register_code(KC_LSFT);
-				unregister_code(KC_LSFT);
-				unregister_code(KC_LALT);
+				register_code(KC_CAPS);
+				unregister_code(KC_CAPS);
+				register_code(KC_LSFT);
+				unregister_code(KC_LCTL);
 			}
 			return false;
 
