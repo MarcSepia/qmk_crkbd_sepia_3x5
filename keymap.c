@@ -9,8 +9,7 @@ enum custom_keycodes {
 	UNDO,
 	LANG,
 	HIRAGANA,
-	KATAKANA,
-	ROMANJI
+	KATAKANA
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -64,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	[_NUM] = LAYOUT_split_3x6_3(
 		//,-----------------------------------------------------------------------.                    ,-----------------------------------------------------------------------.
-			  KC_NO,    HIRAGANA,   ROMANJI,    KATAKANA,     KC_NO,      KC_NO,                          ES_ASTR,     ES_7,       ES_8,       ES_9,      ES_PERC,     KC_NO,
+			  KC_NO,    HIRAGANA,   KATAKANA,    KC_NO,       KC_NO,      KC_NO,                          ES_ASTR,     ES_7,       ES_8,       ES_9,      ES_PERC,     KC_NO,
 		//|-----------+-----------+-----------+-----------+-----------+-----------|                    |-----------+-----------+-----------+-----------+-----------+-----------|
 			  KC_NO,    KC_CAPS,      LANG,       KC_NO,      KC_NO,      KC_NO,                          ES_SLSH,     ES_4,       ES_5,       ES_6,      ES_EQL,      KC_NO,
 		//|-----------+-----------+-----------+-----------+-----------+-----------|                    |-----------+-----------+-----------+-----------+-----------+-----------|
@@ -202,22 +201,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 		case KATAKANA:
 			if (record->event.pressed) {
 				// Alt + Caps Lock
-				register_code(KC_LCTL);
+				register_code(KC_LALT);
 				register_code(KC_CAPS);
 				unregister_code(KC_CAPS);
-				unregister_code(KC_LCTL);
-			}
-			return false;
-
-		case ROMANJI:
-			if (record->event.pressed) {
-				// Ctrl + Shift + Caps Lock
-				register_code(KC_LCTL);
-				register_code(KC_LSFT);
-				register_code(KC_CAPS);
-				unregister_code(KC_CAPS);
-				register_code(KC_LSFT);
-				unregister_code(KC_LCTL);
+				unregister_code(KC_LALT);
 			}
 			return false;
 
