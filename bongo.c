@@ -8,7 +8,7 @@
 #define TAP_FRAMES 2
 #define TAP_SPEED 40
 #define ANIM_FRAME_DURATION 200
-#define ANIM_SIZE 512
+#define ANIM_SIZE 512 // 128x32 OLED size in bytes
 
 bool gui_on = true;
 char wpm_str[10];
