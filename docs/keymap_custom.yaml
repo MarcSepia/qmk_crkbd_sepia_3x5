@@ -1,10 +1,3 @@
-# Inspiring on https://github.com/acerne/acorne?tab=readme-ov-file and https://github.com/manna-harbour/miryoku?tab=readme-ov-file
-# Symbols -> https://www.piliapp.com/symbol/
-
-# Tal vez poner todos estos simbolos en el SYM a la derecha
-# Poner también el # en el symbol layer, no solo en el number layer
-# Añadir repeat keys  https://docs.qmk.fm/features/repeat_key
-
 layout: 
   qmk_keyboard: crkbd/rev1
   qmk_layout: LAYOUT_split_3x5_3
