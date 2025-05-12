@@ -6,6 +6,8 @@ LTO_ENABLE = yes
 EXTRAKEY_ENABLE = yes
 AUTO_SHIFT_ENABLE = no
 
+VIA_ENABLE = yes
+
 # START - OLED Enable
 OLED_ENABLE = yes
 WPM_ENABLE = yes
