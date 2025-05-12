@@ -50,7 +50,13 @@ If you use a different MCU you could check:
 #### 1. Compile the firmware:
 
 ```sh
-qmk compile -kb crkbd -km sepia_3x5x3 -e CONVERT_TO=rp2040_ce
+qmk compile -kb crkbd -km sepia_3x5 -e CONVERT_TO=rp2040_ce
+```
+
+Using the qmk msys you can also compile with make
+
+```sh
+make crkbd:sepia_3x5 CONVERT_TO=rp2040_ce
 ```
 
 #### 2. Flash the keyboard

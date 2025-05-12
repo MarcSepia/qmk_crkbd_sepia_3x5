@@ -38,6 +38,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _NAV 5
 #define _MEDIA 6
 
+#ifdef VIA_ENABLE
+/* VIA configuration. */
+#    define DYNAMIC_KEYMAP_LAYER_COUNT 7
+#endif // VIA_ENABLE
+
 #define TAPPING_TOGGLE 2
 #define TAPPING_FORCE_HOLD_PER_KEY
 #define TAPPING_TERM_PER_KEY
